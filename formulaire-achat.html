@@ -4,99 +4,296 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Achat - Gadzart.io</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
   <style>
-    /* ---------------------
-       STYLE GLOBAL
-    --------------------- */
-    body { margin: 0; font-family: 'Courier New', monospace; background-color: #0a0e1a; color: #ffb347; text-align: center; overflow-x: hidden; }
-    h1, h2 { color: #ffb347; text-transform: uppercase; text-shadow: 0 0 8px #ff6600; }
-    p, li, label { color: #f4f4f4; line-height: 1.6; }
-    a { color: #ffb347; text-decoration: none; }
-    a:hover { color: #fff; }
-    header { background: linear-gradient(180deg, #111a33 0%, #0a0e1a 100%); padding: 40px 20px; border-bottom: 3px solid #ff6600; box-shadow: 0 0 20px #ff6600; }
-    header h1 { font-size: 2.8em; letter-spacing: 3px; }
-    section { max-width: 1000px; margin: 60px auto; padding: 30px; background-color: #141a2a; border: 2px solid #ff6600; border-radius: 16px; box-shadow: 0 0 20px #ff6600; text-align: left; }
-    .btn { display: inline-block; padding: 12px 28px; margin-top: 20px; background: none; border: 2px solid #ffb347; border-radius: 8px; color: #ffb347; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; font-family: 'Courier New', monospace; font-size: 1em; }
-    .btn:hover { background-color: #ffb347; color: #0a0e1a; box-shadow: 0 0 12px #ff6600; }
-    footer { margin-top: 60px; padding: 20px; background-color: #111a33; border-top: 2px solid #ff6600; color: #ffd580; font-size: 0.9em; text-align: center; }
+    :root {
+      --background-dark: #211C18;
+      --background-light: #2E2823;
+      --text-primary: #F0EAD6;
+      --text-secondary: #D3CFC2;
+      --accent-color: #FFBF00;
+      --accent-hover: #D4A000;
+      --border-color: #3D352E;
+      --sidebar-width: 40px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-image: url('./images/Fond_ville.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-primary);
+      text-align: center;
+      overflow-x: hidden;
+      padding-left: var(--sidebar-width);
+      padding-right: var(--sidebar-width);
+    }
+    
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background-color: #1A1613;
+      z-index: 1001;
+    }
+
+    body::before {
+      left: 0;
+      border-right: 1px solid var(--border-color);
+    }
+    
+    body::after {
+      right: 0;
+      border-left: 1px solid var(--border-color);
+    }
+
+    h1, h2, h3 {
+      color: var(--text-primary);
+      text-transform: none;
+      font-weight: 700;
+      text-shadow: none;
+    }
+    
+    h2 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+    
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background-color: rgba(33, 28, 24, 0.95);
+        border-radius: 12px;
+        padding: 60px 40px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
 
     /* ---------------------
-       STYLES FORMULAIRE
+       NAVIGATION
     --------------------- */
-    .form-group { margin-bottom: 25px; }
-    .form-group label { display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.9em; color: #ffd580; }
-    .form-group input[type="text"], .form-group input[type="email"], .form-group textarea { width: 95%; padding: 10px; background-color: #0a0e1a; border: 1px solid #ff6600; border-radius: 4px; color: #f4f4f4; font-family: 'Courier New', monospace; }
-    .form-actions { text-align: center; margin-top: 30px; }
-    
-    /* Styles pour les choix de paiement */
-    .payment-options label {
-      display: inline-block;
-      margin-right: 20px;
-      color: #f4f4f4;
-      cursor: pointer;
+    nav {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(33, 28, 24, 0.7); 
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
     }
-    .payment-options input[type="radio"] {
-      margin-right: 5px;
+    
+    .nav-logo { font-weight: 700; font-size: 1.2em; }
+    .nav-links a { margin-left: 25px; font-weight: 400; }
+    
+    /* ---------------------
+        SECTION PRINCIPALE
+    --------------------- */
+    main {
+        padding-top: 120px; /* Espace pour la nav */
+        padding-bottom: 60px;
+    }
+    
+    /* ---------------------
+       STYLES DU FORMULAIRE
+    --------------------- */
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--background-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+
+    .payment-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+        align-items: center;
+    }
+    .payment-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+
+    .form-actions {
+      text-align: center;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 15px 35px;
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: 8px;
+      color: #111;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      letter-spacing: 1px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1em;
+      width: auto;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-3px);
+      color: #000;
+    }
+    
+    .btn-secondary {
+        background-color: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+    }
+    .btn-secondary:hover {
+        background-color: var(--background-light);
+        color: var(--text-primary);
+        border-color: var(--background-light);
+    }
+
+    /* ---------------------
+       PIED DE PAGE
+    --------------------- */
+    footer {
+      padding: 30px;
+      background-color: #1A1613;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.9em;
+    }
+
+    /* ---------------------
+       RESPONSIVE
+    --------------------- */
+    @media (max-width: 768px) {
+      body { padding-left: 0; padding-right: 0; }
+      body::before, body::after { display: none; }
+      nav { left: 0; right: 0; }
+      main { padding-top: 100px; }
+      .container {
+          padding: 40px 20px;
+          margin-left: 10px;
+          margin-right: 10px;
+          width: auto;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>👾 Gadzart.io 👾</h1>
-  </header>
-
-  <section>
-    <h2>🛒 Formulaire de Commande</h2>
-    
-    <!-- 
-      La redirection est à nouveau configurée pour pointer vers "merci.html".
-      Assurez-vous que ce fichier existe et est dans le même dossier.
-    -->
-    <form action="merci.html" method="GET">
-      <div class="form-group">
-        <label for="fullname">Nom complet</label>
-        <input type="text" id="fullname" name="fullname" placeholder="Ex: Jean Dupont" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Adresse e-mail</label>
-        <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@email.com" required>
-      </div>
-
-      <div class="form-group">
-        <label for="address">Adresse de livraison</label>
-        <textarea id="address" name="address" rows="4" placeholder="Votre adresse complète..." required></textarea>
-      </div>
-      
-      <!-- NOUVELLE SECTION : MOYENS DE PAIEMENT -->
-      <div class="form-group">
-        <label>Moyen de paiement</label>
-        <div class="payment-options">
-          <label for="cb">
-            <input type="radio" id="cb" name="payment_method" value="cb" checked required>
-            💳 Carte Bancaire
-          </label>
-          <label for="paypal">
-            <input type="radio" id="paypal" name="payment_method" value="paypal" required>
-            🅿️ PayPal
-          </label>
-          <label for="transfer">
-            <input type="radio" id="transfer" name="payment_method" value="transfer" required>
-            🏦 Virement
-          </label>
-        </div>
-      </div>
-      
-      <div class="form-actions">
-        <!-- Ce bouton soumet le formulaire et déclenche la redirection -->
-        <button type="submit" class="btn">Valider et Payer</button>
-      </div>
-    </form>
-    
-    <div class="form-actions">
-       <a href="index.html" class="btn">⬅ Annuler et retourner au site</a>
+  <nav>
+    <div class="nav-logo">Gadzart.io</div>
+    <!-- Lien pour retourner à l'accueil -->
+    <div class="nav-links">
+      <a href="index.html">Retour à l'accueil</a>
     </div>
-  </section>
+  </nav>
+
+  <main>
+    <div class="container">
+      <h2>🛒 Formulaire de Commande</h2>
+      
+      <form action="merci.html" method="GET">
+        <div class="form-group">
+          <label for="fullname">Nom complet</label>
+          <input type="text" id="fullname" name="fullname" placeholder="Ex: Jean Dupont" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Adresse e-mail</label>
+          <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Adresse de livraison</label>
+          <textarea id="address" name="address" rows="4" placeholder="Votre adresse complète..." required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Moyen de paiement</label>
+          <div class="payment-options">
+            <label for="cb">
+              <input type="radio" id="cb" name="payment_method" value="cb" checked required>
+              💳 Carte Bancaire
+            </label>
+            <label for="paypal">
+              <input type="radio" id="paypal" name="payment_method" value="paypal" required>
+              🅿️ PayPal
+            </label>
+            <label for="transfer">
+              <input type="radio" id="transfer" name="payment_method" value="transfer" required>
+              🏦 Virement
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn">Valider et Payer</button>
+          <a href="index.html" class="btn btn-secondary">⬅ Annuler</a>
+        </div>
+      </form>
+    </div>
+  </main>
 
   <footer>
     <p>© 2025 Gadzart.io — Conçu avec ❤️ par les élèves des Arts & Métiers</p>
