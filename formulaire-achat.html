@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achat - Gadzart.io</title>
+  <style>
+    /* ---------------------
+       STYLE GLOBAL
+    --------------------- */
+    body { margin: 0; font-family: 'Courier New', monospace; background-color: #0a0e1a; color: #ffb347; text-align: center; overflow-x: hidden; }
+    h1, h2 { color: #ffb347; text-transform: uppercase; text-shadow: 0 0 8px #ff6600; }
+    p, li, label { color: #f4f4f4; line-height: 1.6; }
+    a { color: #ffb347; text-decoration: none; }
+    a:hover { color: #fff; }
+    header { background: linear-gradient(180deg, #111a33 0%, #0a0e1a 100%); padding: 40px 20px; border-bottom: 3px solid #ff6600; box-shadow: 0 0 20px #ff6600; }
+    header h1 { font-size: 2.8em; letter-spacing: 3px; }
+    section { max-width: 1000px; margin: 60px auto; padding: 30px; background-color: #141a2a; border: 2px solid #ff6600; border-radius: 16px; box-shadow: 0 0 20px #ff6600; text-align: left; }
+    .btn { display: inline-block; padding: 12px 28px; margin-top: 20px; background: none; border: 2px solid #ffb347; border-radius: 8px; color: #ffb347; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; font-family: 'Courier New', monospace; font-size: 1em; }
+    .btn:hover { background-color: #ffb347; color: #0a0e1a; box-shadow: 0 0 12px #ff6600; }
+    footer { margin-top: 60px; padding: 20px; background-color: #111a33; border-top: 2px solid #ff6600; color: #ffd580; font-size: 0.9em; text-align: center; }
+
+    /* ---------------------
+       STYLES FORMULAIRE
+    --------------------- */
+    .form-group { margin-bottom: 25px; }
+    .form-group label { display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.9em; color: #ffd580; }
+    .form-group input[type="text"], .form-group input[type="email"], .form-group textarea { width: 95%; padding: 10px; background-color: #0a0e1a; border: 1px solid #ff6600; border-radius: 4px; color: #f4f4f4; font-family: 'Courier New', monospace; }
+    .form-actions { text-align: center; margin-top: 30px; }
+    
+    /* Styles pour les choix de paiement */
+    .payment-options label {
+      display: inline-block;
+      margin-right: 20px;
+      color: #f4f4f4;
+      cursor: pointer;
+    }
+    .payment-options input[type="radio"] {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>👾 Gadzart.io 👾</h1>
+  </header>
+
+  <section>
+    <h2>🛒 Formulaire de Commande</h2>
+    
+    <!-- 
+      La redirection est à nouveau configurée pour pointer vers "merci.html".
+      Assurez-vous que ce fichier existe et est dans le même dossier.
+    -->
+    <form action="merci.html" method="GET">
+      <div class="form-group">
+        <label for="fullname">Nom complet</label>
+        <input type="text" id="fullname" name="fullname" placeholder="Ex: Jean Dupont" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" placeholder="Ex: jean.dupont@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Adresse de livraison</label>
+        <textarea id="address" name="address" rows="4" placeholder="Votre adresse complète..." required></textarea>
+      </div>
+      
+      <!-- NOUVELLE SECTION : MOYENS DE PAIEMENT -->
+      <div class="form-group">
+        <label>Moyen de paiement</label>
+        <div class="payment-options">
+          <label for="cb">
+            <input type="radio" id="cb" name="payment_method" value="cb" checked required>
+            💳 Carte Bancaire
+          </label>
+          <label for="paypal">
+            <input type="radio" id="paypal" name="payment_method" value="paypal" required>
+            🅿️ PayPal
+          </label>
+          <label for="transfer">
+            <input type="radio" id="transfer" name="payment_method" value="transfer" required>
+            🏦 Virement
+          </label>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <!-- Ce bouton soumet le formulaire et déclenche la redirection -->
+        <button type="submit" class="btn">Valider et Payer</button>
+      </div>
+    </form>
+    
+    <div class="form-actions">
+       <a href="index.html" class="btn">⬅ Annuler et retourner au site</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Gadzart.io — Conçu avec ❤️ par les élèves des Arts & Métiers</p>
+  </footer>
+</body>
+</html>
