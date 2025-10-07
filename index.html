@@ -119,14 +119,13 @@
        SECTIONS
     --------------------- */
     section {
-      padding: 50px 20px; /* Espacement vertical entre les sections */
+      padding: 50px 20px;
     }
     
-    /* MODIFICATION : Le style est appliqué au .container et non à la section */
     main section:not(.hero) .container {
         background-color: rgba(33, 28, 24, 0.95);
         border-radius: 12px;
-        padding: 60px 40px; /* Padding intérieur pour le contenu */
+        padding: 60px 40px;
         border: 1px solid var(--border-color);
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
@@ -179,7 +178,7 @@
     /* ---------------------
        CARTES DE CONTENU
     --------------------- */
-    .console, .characters, .gallery, .news-container {
+    .console, .characters, .gallery, .news-container, .reviews-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -187,37 +186,62 @@
       text-align: left;
     }
 
-    .console img {
-      width: 100%;
-      max-width: 350px;
-      border-radius: 12px;
-    }
-
+    .console img { width: 100%; max-width: 350px; border-radius: 12px; }
     .console-description { max-width: 450px; }
-
-    .character, .news-item {
-      background-color: var(--background-light);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    
-    .character:hover, .news-item:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-color);
-    }
-
     .character { width: 240px; }
     .character img { width: 100%; border-radius: 8px; margin-bottom: 15px; }
     .character h3 { margin: 0 0 5px 0; color: var(--text-primary); }
     .gallery img { width: 100%; max-width: 320px; border-radius: 12px; transition: transform 0.3s ease; }
     .gallery img:hover { transform: scale(1.05); }
+
+    .character, .news-item, .review-card {
+      background-color: var(--background-light);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 25px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .character:hover, .news-item:hover, .review-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-color);
+    }
+    
     .news-item { width: 100%; max-width: 500px; }
     .news-item h3 { font-size: 1.2em; display: flex; align-items: center; }
     .news-icon { width: 24px; height: 24px; margin-right: 12px; }
     .news-date { font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px; }
+
+    /* ---------------------
+       NOUVEAU : STYLE DES AVIS
+    --------------------- */
+    .review-card {
+      width: 100%;
+      max-width: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    .review-card blockquote {
+      margin: 0 0 20px 0;
+      font-style: italic;
+      color: var(--text-primary);
+      font-size: 1.1em;
+      border-left: 3px solid var(--accent-color);
+      padding-left: 20px;
+      flex-grow: 1; /* Permet aux cartes d'avoir la même hauteur */
+    }
+    .reviewer {
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: right;
+    }
+    .reviewer span {
+      display: block;
+      font-weight: 400;
+      font-size: 0.9em;
+      color: var(--text-secondary);
+    }
 
     /* ---------------------
        PIED DE PAGE
@@ -242,7 +266,7 @@
       nav { left: 0; right: 0; }
       .hero h1 { font-size: 3em; }
       main section:not(.hero) .container {
-          padding: 40px 20px; /* Moins de padding sur mobile */
+          padding: 40px 20px;
       }
     }
   </style>
@@ -253,6 +277,7 @@
     <div class="nav-links">
       <a href="#about">À propos</a>
       <a href="#characters">Personnages</a>
+      <a href="#reviews">Avis</a> <!-- LIEN AJOUTÉ -->
       <a href="#news">Actualités</a>
     </div>
   </nav>
@@ -320,6 +345,27 @@
           <img src="./images/cluny.png" alt="Salle d'honneur Cluny">
         </div>
       </div>
+    </section>
+    
+    <!-- NOUVELLE SECTION AVIS -->
+    <section id="reviews" class="hidden">
+        <div class="container">
+            <h2>💬 Ils en parlent mieux que nous</h2>
+            <div class="reviews-container">
+                <div class="review-card">
+                    <blockquote>"Un mélange inattendu de nostalgie 8-bit et d'ingénierie qui fonctionne à merveille. Le charme de Gadzart.io est tout simplement irrésistible. 9.5/10"</blockquote>
+                    <div class="reviewer">IGN <span>Critique Jeu Vidéo</span></div>
+                </div>
+                <div class="review-card">
+                    <blockquote>"Ce n'est pas un jeu, c'est une connexion. Chaque boulon serré, chaque machine réparée... c'est une métaphore de la transmission du savoir. Profond et audacieux."</blockquote>
+                    <div class="reviewer">Hideo Kojima <span>Créateur de Jeux Vidéo</span></div>
+                </div>
+                <div class="review-card">
+                    <blockquote>"Le plaisir de créer est au cœur de Gadzart.io. On ressent la passion des étudiants dans chaque pixel. Une expérience qui rend heureux !"</blockquote>
+                    <div class="reviewer">Shigeru Miyamoto <span>Concepteur chez Nintendo</span></div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="news" class="hidden">
