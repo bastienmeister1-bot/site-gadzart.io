@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gadzart.io - Les Règles du Jeu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --background-dark: #211C18;
+      --background-light: #2E2823;
+      --text-primary: #F0EAD6;
+      --text-secondary: #D3CFC2;
+      --accent-color: #FFBF00;
+      --accent-hover: #D4A000;
+      --border-color: #3D352E;
+      --sidebar-width: 40px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      /* On réutilise l'image de fond du site principal */
+      background-image: url('./images/Fond_Ville.png'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--text-primary);
+      text-align: center;
+      overflow-x: hidden;
+      padding-left: var(--sidebar-width);
+      padding-right: var(--sidebar-width);
+    }
+    
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      width: var(--sidebar-width);
+      height: 100%;
+      background-color: #1A1613;
+      z-index: 1001;
+    }
+
+    body::before {
+      left: 0;
+      border-right: 1px solid var(--border-color);
+    }
+    
+    body::after {
+      right: 0;
+      border-left: 1px solid var(--border-color);
+    }
+
+    h1, h2, h3, h4 { /* Ajout de h4 pour la structure des règles */
+      color: var(--text-primary);
+      text-transform: none;
+      font-weight: 700;
+      text-shadow: none;
+    }
+    
+    h2 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 800px; /* Légèrement plus large pour le contenu des règles */
+      margin-left: auto;
+      margin-right: auto;
+      text-align: justify; /* Aligné pour une meilleure lecture des règles */
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+    
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        text-align: left; /* Aligner le contenu du container à gauche */
+    }
+
+    /* ---------------------
+       NAVIGATION (Copie du style principal)
+    --------------------- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      right: var(--sidebar-width);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(33, 28, 24, 0.7); 
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .nav-logo { font-weight: 700; font-size: 1.2em; }
+    /* Les liens renvoient à la page d'accueil (index.html) sauf la page actuelle */
+    .nav-links a { margin-left: 25px; font-weight: 400; } 
+    .nav-links .active { color: var(--accent-color); font-weight: 700; }
+
+
+    /* ---------------------
+       SECTION ET CONTENEUR DE RÈGLES
+    --------------------- */
+    section {
+      padding: 50px 20px;
+    }
+    
+    main section .container {
+        background-color: rgba(33, 28, 24, 0.95);
+        border-radius: 12px;
+        padding: 60px 40px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        margin-top: 100px; /* Espacement après la nav fixe */
+    }
+    
+    /* Styles spécifiques aux règles */
+    .rules-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .rules-header h1 {
+        font-size: 3em;
+        margin-top: 0;
+    }
+    .rules-content h3 {
+        border-left: 4px solid var(--accent-color);
+        padding-left: 15px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        font-size: 1.8em;
+    }
+    .rules-content h4 {
+        color: var(--accent-color);
+        margin-top: 30px;
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+
+    ol.level-list {
+        list-style: decimal;
+        margin-left: 20px;
+        padding-left: 20px;
+        max-width: 800px;
+        margin: 20px auto 40px 0; /* Alignement à gauche */
+    }
+    ol.level-list li {
+        margin-bottom: 15px;
+        color: var(--text-secondary);
+        text-align: left;
+    }
+    
+    /* Styles pour les tableaux */
+    .rules-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0 30px 0;
+      font-size: 1em;
+      text-align: left;
+    }
+    .rules-table th, .rules-table td {
+      padding: 15px;
+      border: 1px solid var(--border-color);
+    }
+    .rules-table th {
+      background-color: var(--background-light);
+      color: var(--text-primary);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .rules-table td {
+      background-color: rgba(46, 40, 35, 0.8);
+      color: var(--text-secondary);
+    }
+    .rules-table tr:nth-child(even) td {
+      background-color: rgba(46, 40, 35, 0.6);
+    }
+    
+    .carn-description ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .carn-description ul li {
+        background-color: var(--background-light);
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        border-left: 3px solid var(--accent-color);
+    }
+
+    /* Décret final */
+    .decret {
+        text-align: center;
+        border: 2px solid var(--accent-color);
+        padding: 25px;
+        margin-top: 50px;
+        border-radius: 8px;
+        background-color: var(--background-light);
+        box-shadow: 0 0 15px rgba(255, 191, 0, 0.2);
+    }
+    .decret p {
+        margin: 10px auto;
+        text-align: center;
+    }
+
+
+    /* ---------------------
+       ANIMATION & RESPONSIVE
+    --------------------- */
+    .hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .visible { opacity: 1; transform: translateY(0); }
+    
+    @media (max-width: 768px) {
+      body { padding-left: 0; padding-right: 0; }
+      body::before, body::after { display: none; }
+      nav { left: 0; right: 0; }
+      .rules-header h1 { font-size: 2.5em; }
+      main section .container {
+          padding: 30px 20px;
+          margin-top: 70px;
+      }
+      .rules-content h3 { font-size: 1.5em; }
+      p { text-align: left; }
+      
+      /* Mobile Table Stack (Optional for better view on small screens) */
+      .rules-table th, .rules-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+      }
+      .rules-table td {
+          border-top: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">Gadzart.io</div>
+    <div class="nav-links">
+      <!-- Les liens renvoient à la page principale (index.html) et utilisent le fragment (#) -->
+      <a href="index.html#about">À propos</a>
+      <a href="index.html#characters">Personnages</a>
+      <a href="index.html#reviews">Avis</a> 
+      <a href="index.html#news">Actualités</a>
+      <!-- MODIFICATION ICI : Le lien "Règles du Jeu" renvoie maintenant à "regle.html" -->
+      <a href="regle.html" class="active">Règles du Jeu</a> 
+    </div>
+  </nav>
+
+  <main>
+    <!-- Utilisation de la structure de section standard avec la classe hidden pour l'animation -->
+    <section id="regles" class="hidden">
+      <div class="container">
+        <div class="rules-header">
+            <h2>📜 Manuel de Jeu Officiel</h2>
+            <h1>L'Aventure Gadzarique : De Petiot à Gadzarts</h1>
+            <p style="text-align: center; font-style: italic; font-weight: 700;">Statuts de l'Aspirant Gadzarts</p>
+        </div>
+
+        <div class="rules-content">
+
+            <!-- I. Déclaration de Mission et Objectif -->
+            <h3>I. Déclaration de Mission et Objectif</h3>
+            <p style="text-align: left;">
+                <strong>STATUT INITIÉ :</strong> Petiot
+            </p>
+            <p style="text-align: left;">
+                <strong>OBJECTIF SUPRÊME :</strong> Atteindre le statut de Gadzarts accompli en validant l'ensemble des étapes de la vie au Arts. L'échec ou l'expulsion signifie le retour forcé à l'usine.
+            </p>
+
+            <!-- II. Le Grand Périple : Les Environnements (Niveaux) -->
+            <h3>II. Le Grand Périple : Les Environnements (Niveaux)</h3>
+            <p>Le jeu retrace les moments cruciaux du cursus gadzarique, chaque niveau représentant une phase d'apprentissage et d'intégration :</p>
+            <ol class="level-list">
+              <li><strong>L'Intégration (La Découverte) :</strong> Apprentissage des usages et survie dans le foyer (Foy's).</li>
+              <li><strong>La Quenotte (L'Excellence Académique) :</strong> Gestion des études, des veilles et des projets techniques.</li>
+              <li><strong>Les Traditions (L'Âme de l'École) :</strong> Maîtrise des rites, chants et protocoles.</li>
+              <li><strong>L'Ascension (La Consécration) :</strong> La phase finale avant la reconnaissance officielle du statut.</li>
+            </ol>
+
+            <!-- III. Les Statuts de la Menace et le Carn's -->
+            <h3>III. Les Statuts de la Menace et le Carn's</h3>
+
+            <h4>A. Les Embûches (Obstacles)</h4>
+            <p>Votre progression est entravée par différentes menaces. Leur gestion détermine votre succès :</p>
+            <table class="rules-table">
+              <thead>
+                <tr>
+                  <th>Type de Menace</th>
+                  <th>Niveau de Danger</th>
+                  <th>Action Recommandée</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Obstacles Communs</td>
+                  <td>Moyen</td>
+                  <td>Détruire en lançant le Carn's. Rapportent Points d'Expérience et de Tradition.</td>
+                </tr>
+                <tr>
+                  <td>Zident TTan's (L'Autorité)</td>
+                  <td style="color: #FF4444; font-weight: 700;">CRITIQUE</td>
+                  <td>Éviter à tout prix. INVULNÉRABLES. Tout tir de Carn's sur un Zident TTan's mène à l'échec immédiat (Game Over).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h4>B. Le Lancement du Carn's</h4>
+            <div class="carn-description">
+              <p>Le Carn's est l'outil sacré du Petiot pour dégager son chemin. Il symbolise la détermination.</p>
+              <ul>
+                <li><strong>Fonction :</strong> Destruction des Obstacles Communs.</li>
+                <li><strong>Contre-Indication :</strong> Ne doit jamais être utilisé contre les Zident TTan's.</li>
+              </ul>
+            </div>
+            
+            <!-- IV. Manuel du Pilote (Les Commandes) -->
+            <h3>IV. Manuel du Pilote (Les Commandes)</h3>
+            <p>Pour naviguer à travers le Campus, le Petiot doit maîtriser son interface de contrôle :</p>
+            <table class="rules-table">
+              <thead>
+                <tr>
+                  <th>Touche / Commande</th>
+                  <th>Fonction en Jeu</th>
+                  <th>Protocole d'Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Flèches Directionnelles</td>
+                  <td>Déplacement</td>
+                  <td>Mouvements dans les quatre directions au sein des environnements.</td>
+                </tr>
+                <tr>
+                  <td>X</td>
+                  <td>Tir de Carn's</td>
+                  <td>Active le lancement du Carn's pour détruire un obstacle.</td>
+                </tr>
+                <tr>
+                  <td>Gâchettes (LT/RT)</td>
+                  <td>Déplacement Rapide (Le Taz Éclair)</td>
+                  <td>Permet un dash latéral pour esquiver rapidement les Zidents ou les menaces imminentes.</td>
+                </tr>
+                <tr>
+                  <td>APUSE</td>
+                  <td>Mise en Pause</td>
+                  <td>Suspension temporaire de l'action pour réflexion ou rappel de chant.</td>
+                </tr>
+                <tr>
+                  <td>Start</td>
+                  <td>Redémarrage Complet</td>
+                  <td>Annulation de la partie en cours. Retour au statut Petiot du niveau 1.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Décret Final -->
+            <div class="decret">
+              <p style="font-size: 1.1em; font-weight: 700; color: var(--accent-color);">Décret Final :</p>
+              <p>Que votre parcours soit éclairé et votre esprit vif. N'oubliez jamais : <strong style="color: #FF4444;">L'Évitement est la première forme de Respect envers la TTan's.</strong> En avant, Petiot !</p>
+              <p style="font-style: italic;">Sachez être renard, des portes secrètes peuvent se cacher sur votre chemin.</p>
+            </div>
+            
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Gadzart.io — Conçu avec ❤️ par les élèves des Arts & Métiers</p>
+  </footer>
+
+  <script>
+    // Script d'animation de défilement repris de la page principale
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.hidden');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); 
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+      
+      // La section des règles est la première et doit être visible rapidement
+      document.getElementById('regles').classList.add('visible');
+    });
+  </script>
+
+</body>
+</html>
