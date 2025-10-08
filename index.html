@@ -18,6 +18,9 @@
       --accent-hover: #D4A000;
       --border-color: #3D352E;
       --sidebar-width: 40px;
+      /* Nouvelle couleur pour le bouton secondaire */
+      --secondary-btn-bg: rgba(255, 255, 255, 0.1); 
+      --secondary-btn-hover: rgba(255, 255, 255, 0.2); 
     }
 
     html {
@@ -154,10 +157,17 @@
       text-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
 
+    /* Conteneur pour les boutons du Hero */
+    .hero-buttons {
+        display: flex;
+        gap: 20px; /* Espace entre les boutons */
+        justify-content: center;
+        margin-top: 20px;
+    }
+
     .btn {
       display: inline-block;
       padding: 15px 35px;
-      margin-top: 20px;
       background-color: var(--accent-color);
       border: none;
       border-radius: 8px;
@@ -174,6 +184,22 @@
       transform: translateY(-3px);
       color: #000;
     }
+    
+    /* Style pour le nouveau bouton "Règles" (Secondaire) */
+    .btn.secondary {
+        background-color: var(--secondary-btn-bg);
+        color: var(--text-primary);
+        border: 2px solid var(--text-secondary);
+        padding: 13px 33px; /* Ajustement du padding pour maintenir la hauteur */
+    }
+
+    .btn.secondary:hover {
+        background-color: var(--secondary-btn-hover);
+        transform: translateY(-3px);
+        color: var(--text-primary);
+        border-color: var(--accent-color);
+    }
+
 
     /* ---------------------
        CARTES DE CONTENU
@@ -268,6 +294,10 @@
       main section:not(.hero) .container {
           padding: 40px 20px;
       }
+      .hero-buttons {
+        flex-direction: column; /* Empile les boutons sur mobile */
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -277,8 +307,10 @@
     <div class="nav-links">
       <a href="#about">À propos</a>
       <a href="#characters">Personnages</a>
-      <a href="#reviews">Avis</a> <!-- LIEN AJOUTÉ -->
+      <a href="#reviews">Avis</a> 
       <a href="#news">Actualités</a>
+      <!-- AJOUT DU LIEN VERS LA PAGE DES RÈGLES -->
+      <a href="regle.html">Règles</a> 
     </div>
   </nav>
 
@@ -287,7 +319,13 @@
       <div class="container">
         <h1>👾 Gadzart.io 👾</h1>
         <p>Le jeu rétro inspiré des Arts & Métiers, dans un écrin moderne.</p>
-        <a href="formulaire-achat.html" class="btn">▶ Acheter le jeu</a>
+        
+        <!-- NOUVEAU CONTENEUR POUR LES BOUTONS -->
+        <div class="hero-buttons">
+            <a href="formulaire-achat.html" class="btn">▶ Acheter le jeu</a>
+            <!-- AJOUT DU BOUTON POUR LA PAGE DES RÈGLES -->
+            <a href="regle.html" class="btn secondary">Règles du Jeu</a>
+        </div>
       </div>
     </section>
 
